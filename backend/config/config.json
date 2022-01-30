@@ -1,0 +1,5 @@
+{
+    "cacheApiKey": "mohfw-api-data",
+    "cacheTTL": "900",
+    "scrapingInterval" : "840"
+}

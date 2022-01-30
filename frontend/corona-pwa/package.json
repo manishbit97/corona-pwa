@@ -1,0 +1,51 @@
+{
+  "name": "corona-pwa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack serve --config build-conf/webpack.config.js --env env=dev",
+    "build": "cp -v -R public/* dist/ && webpack --config build-conf/webpack.config.js --env env=prod && cp -R public/* dist/ ",
+    "http-start": "http-server dist",
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "keywords": [],
+  "author": "Manish Kumar <manishbit97@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.1",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^9.0.0",
+    "dotenv-webpack": "^5.0.0",
+    "html-webpack-plugin": "^4.5.0",
+    "http-server": "^14.1.0",
+    "prettier": "^2.1.2",
+    "react-hot-loader": "^4.13.0",
+    "svg-url-loader": "^7.1.1",
+    "webpack": "^5.3.2",
+    "webpack-bundle-analyzer": "^3.9.0",
+    "webpack-cli": "^4.1.0",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.3.0"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/styles": "^4.11.4",
+    "@mui/icons-material": "^5.3.0",
+    "@mui/material": "^5.3.0",
+    "@mui/x-data-grid": "^5.3.0",
+    "@mui/x-data-grid-generator": "^5.3.0",
+    "mui-layout": "^1.2.9",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.1"
+  }
+}
