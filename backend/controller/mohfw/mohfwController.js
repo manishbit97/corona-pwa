@@ -4,6 +4,7 @@ const mohfwService = require('../../services/mohfw/mohfwService.js');
 
 // routes
 router.get('/getalldata', getAllCovidData);
+router.get("/test", (req, res) => res.json({ "success":"true" }));
 
 module.exports = router;
 

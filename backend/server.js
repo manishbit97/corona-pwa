@@ -19,14 +19,14 @@ app.use(cors());
 
 app.use(express.json({ limit: '100kb' })); // Body limit is 10
 
-// APIS 
+// APIS
 // --------------------------------
 // /api/scrape/mohfw -- - this will only scrape data from mohfw and update the cache.
 // /api/covid/getdata - -  this api used by frontend to fetch the data only from cache..if not present hit the mohfw.
 
-app.use('/api/scrape', require('./controller/mohfw/scrapeController'));
+app.use('/pwa/api/scrape', require('./controller/mohfw/scrapeController'));
 
-app.use('/api/covid', require('./controller/mohfw/mohfwController'));
+app.use('/pwa/api/covid', require('./controller/mohfw/mohfwController'));
 
 app.use(errorHandler);
 const { startCron } = require('./services/mohfw/cronService');
