@@ -47,7 +47,7 @@ function VaccineSummary(props) {
                             p: 2,
                             display: 'flex',
                             flexDirection: 'column',
-                            height: 120,
+                            height: 130,
                         }}
                     >
                         {/* <Card title={"Active"}

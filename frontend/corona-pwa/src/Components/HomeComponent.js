@@ -1,11 +1,12 @@
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import { TopSummary, StateDataTable,VaccineSummary } from './HomePage';
+import { TopSummary, StateDataTable, VaccineSummary } from './HomePage';
 import { useEffect, useState } from 'react';
 import { getList } from '../Services/coronaService';
 import Box from '@mui/material/Box';
-
+import IndiaMap from '../Components/IndiaMap'
+import Title from './Common/Title';
 function HomeComponent() {
     const [apiRes, setApiRes] = useState({});
     useEffect(() => {
@@ -22,6 +23,13 @@ function HomeComponent() {
             <VaccineSummary other_info={apiRes.scrap_data} />
             <Box mt={5}>
                 <StateDataTable data={apiRes.all_data} />
+            </Box>
+            <Box mt={7}>
+                <Title >Active Cases India</Title>
+            </Box>
+
+            <Box>
+                <IndiaMap dataApi={apiRes.all_data} />
             </Box>
         </div>
     );

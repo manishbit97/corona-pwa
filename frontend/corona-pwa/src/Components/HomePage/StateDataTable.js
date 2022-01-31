@@ -38,16 +38,19 @@ function StateDataTable(props) {
         { field: 'id', headerName: 'S.no', width: 70 },
         {
             field: 'state_name',
-            headerName: 'Name of State / UT',
-            width: 300,
+            headerName: 'State / UT',
+            width: 250,
             editable: false,
-            noWrap: true
+            noWrap: true,
+            headerClassName: 'super-app-theme--header'
+
         },
         {
             field: 'active_main',
             headerName: 'Active',
-            width: 210,
+            flex: 1,
             editable: false,
+            headerClassName: 'super-app-theme--header',
             renderCell: (params) => {
                 let isRed = parseInt(params.value.delta_active) > 0 ? true : false;
                 return (
@@ -69,8 +72,9 @@ function StateDataTable(props) {
         {
             field: 'cured_main',
             headerName: 'Recovered',
-            width: 210,
+            flex: 1,
             editable: false,
+            headerClassName: 'super-app-theme--header',
             renderCell: (params) => {
                 let isRed = parseInt(params.value.delta_cured) > 0 ? false : true;
                 return (
@@ -92,12 +96,23 @@ function StateDataTable(props) {
         {
             field: 'death_main',
             headerName: 'Death',
-            width: 210,
+            flex: 0.8,
             editable: false,
+            headerClassName: 'super-app-theme--header',
             renderCell: (params) => {
                 let isRed = parseInt(params.value.delta_death) > 0 ? true : false;
                 return (
-                    <div>
+                    <Box
+                        sx={{
+                            width: {
+                                xs: "100%", // theme.breakpoints.up('xs')
+                                sm: 600, // theme.breakpoints.up('sm')
+                                md: 100, // theme.breakpoints.up('md')
+                                lg: 75, // theme.breakpoints.up('lg')
+                                xl: 75, // theme.breakpoints.up('xl')
+                            },
+                        }}
+                    >
                         {isRed ?
                             <ArrowUpwardIcon style={{ color: "red", fontSize: 15 }} /> :
                             <ArrowDownwardIcon style={{ color: "green", fontSize: 15 }} />}
@@ -107,20 +122,34 @@ function StateDataTable(props) {
                         <Typography variant="subtitle1" style={{ htmlFontSize: 18 }}>
                             {formattedNumber(params.value.death)}
                         </Typography>
-                    </div>
+                    </Box>
                 )
             },
             sortComparator: (v1, v2) => v1.death - (v2.death)
         },
     ];
-    if(!props.data || props.data.length <= 0){
+    if (!props.data || props.data.length <= 0) {
         return (<div>Loading...</div>)
     }
     const rows = mapResponseData(props.data);
     return (
         <React.Fragment>
             {/* <Paper sm={{ my: 10, p: 2 }} md={{ my: 10, p: 2 }} lg={{ my: 10, p: 2 }}> */}
-            <div style={{ height: '100%', width: '90%' }} >
+            <Box
+                sx={{
+                    width: {
+                        xs: "100%", // theme.breakpoints.up('xs')
+                        sm: "100%", // theme.breakpoints.up('sm')
+                        md: "100%", // theme.breakpoints.up('md')
+                        lg: "100%", // theme.breakpoints.up('lg')
+                        xl: "75%", // theme.breakpoints.up('xl')
+                    },
+                    '& .super-app-theme--header': {
+                        backgroundColor: '#a5c7e9',
+                    },
+                    borderRadius: 5
+                }}
+            >
 
                 <Title style={{ marginTop: '55px' }} >State Wise Data</Title>
 
@@ -128,13 +157,27 @@ function StateDataTable(props) {
                     rows={rows}
                     columns={columns}
                     pageSize={39}
-                    rowHeight={70}
+                    rowHeight={55}
+                    disableColumnMenu={true}
                     // rowsPerPageOptions={[5]}
                     autoHeight
                     disableSelectionOnClick
                     hideFooter={true}
+                    sx={{
+                        boxShadow: 5,
+                    }}
+                    initialState={{
+                        columns: {
+                            columnVisibilityModel: {
+                                id: false,
+                            },
+                        },
+                        sorting: {
+                            sortModel: [{ field: 'active_main', sort: 'desc' }],
+                        },
+                    }}
                 />
-            </div>
+            </Box>
             {/* </Paper> */}
         </React.Fragment>
     );

@@ -24,7 +24,7 @@ precacheAndRoute(self.__WB_MANIFEST);
  */
 registerRoute(
     ({ url }) =>
-        url.pathname === '/api/covid/getalldata',
+        url.pathname === '/pwa/api/covid/getalldata',
     new CacheFirst({
         cacheName: 'covid-api-response',
         plugins: [

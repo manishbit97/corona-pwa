@@ -7,6 +7,7 @@ import Divider from '@mui/material/Divider';
 import { formattedNumber } from '../../Utils';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import Box from '@mui/material/Box';
 
 function Card(props) {
     return (
@@ -54,14 +55,14 @@ function TopSummary(props) {
                             p: 2,
                             display: 'flex',
                             flexDirection: 'column',
-                            height: 150,
+                            height: 130,
                         }}
                     >
                         <Card title={"Active"}
                             delta={delta_active}
                             number={active}
                             isUp={delta_active > 0 ? true : false}
-                            isRed={delta_active < 0 ? true : false}
+                            isRed={delta_active > 0 ? true : false}
                         />
                     </Paper>
                 </Grid>
@@ -71,7 +72,7 @@ function TopSummary(props) {
                             p: 2,
                             display: 'flex',
                             flexDirection: 'column',
-                            height: 150,
+                            height: 130,
                         }}
                     >
                         <Card title={"Recovered"}
@@ -88,7 +89,7 @@ function TopSummary(props) {
                             p: 2,
                             display: 'flex',
                             flexDirection: 'column',
-                            height: 150,
+                            height: 130,
                         }}
                     >
                         <Card title={"Deceased"}

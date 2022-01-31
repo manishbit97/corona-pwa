@@ -17,9 +17,9 @@ export default function registerServiceWorker() {
              */
             console.log("Service worker installed");
             if (event.isUpdate) {
-                if (confirm(`New app update is available!. Click OK to refresh`)) {
-                    window.location.reload();
-                }
+                // if (confirm(`New app update is available!. Click OK to refresh`)) {
+                    // window.location.reload();
+                // }
             }
         });
         wb.register();
