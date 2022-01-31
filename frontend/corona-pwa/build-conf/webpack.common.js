@@ -2,6 +2,9 @@ const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
+const { InjectManifest } = require('workbox-webpack-plugin');
+
 
 module.exports = {
   entry: path.resolve(__dirname, '..', './src/index.js'),
@@ -36,8 +39,12 @@ module.exports = {
     }),
     new CopyWebpackPlugin({
       patterns: [
-        { from: 'public'}
+        { from: 'public' }
       ]
+    }),
+    new InjectManifest({
+      swSrc: './src/src-sw.js',
+      swDest: 'sw.js',
     })
   ],
   output: {

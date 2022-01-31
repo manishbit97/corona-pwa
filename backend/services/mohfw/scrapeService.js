@@ -1,8 +1,12 @@
 const config = require('../../config/config.json');
 const axios = require('axios');
 const cacheHelper = require('../../services/_helper/cacheHelper');
+const cheerio = require('cheerio');
+const rp = require('request-promise');
+
 module.exports = {
     scrapeMohfwApi,
+    getScrapData
 };
 
 let formatApiResponse = (apidata) => {
@@ -27,7 +31,34 @@ async function scrapeMohfwApi() {
         const response = await axios('https://www.mohfw.gov.in/data/datanew.json');
         console.log("Data fetched from mohfw succesfully");
         let data = formatApiResponse(response.data);
-        cacheHelper.setNodeCache(config.cacheApiKey, data, config.cacheTTL);
-        resolve(data);
+        let scrap_data = await getScrapData();
+
+        let resObj = { "all_data": data, "scrap_data": scrap_data };
+        cacheHelper.setNodeCache(config.cacheApiKey, resObj, config.cacheTTL);
+        resolve(resObj);
     })
+}
+
+async function getScrapData() {
+    return new Promise((resolve, reject) => {
+        rp('https://www.mohfw.gov.in')
+            .then(function (html) {
+                //success!
+                const $ = cheerio.load(html);
+                const totalVaccin = $('#site-dashboard > div > div > div:nth-child(2) > div.col-xs-8.site-stats-count.sitetotal > div > span.coviddata').text();
+                const time = $('#site-dashboard > div > div > div:nth-child(1) > div:nth-child(1) > h5 > span').text().split('IST')[0].split('on :')[1].trim();
+                const delta_vaccin = $("#site-dashboard > div > div > div:nth-child(2) > div.col-xs-8.site-stats-count.sitetotal > div > span.coviddataval").text().replace(/[():]/g,'').trim();
+                console.log(delta_vaccin);
+                const vaccin_timestamp = $('#site-dashboard > div > div > div:nth-child(2) > div.col-xs-2 > h6 > span').text().split("on :")[1].trim()
+                const delta_test = $('#main-content > header > div > div > div > div:nth-child(1) > div > marquee > span').text().split('day ')[1].trim()
+                let jsonRes = { "total_vaccin": totalVaccin, "delta_vaccin": delta_vaccin, "time": time, "vaccin_timestamp": vaccin_timestamp, "delta_test": delta_test };
+                console.log("Webpage scrapped from mohfw");
+                resolve(jsonRes);
+            })
+            .catch(function (err) {
+                //handle error
+                reject(err);
+            });
+    })
+
 }

@@ -1,23 +1,27 @@
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import { TopSummary, StateDataTable } from './HomePage';
+import { TopSummary, StateDataTable,VaccineSummary } from './HomePage';
 import { useEffect, useState } from 'react';
 import { getList } from '../Services/coronaService';
 import Box from '@mui/material/Box';
 
 function HomeComponent() {
-    const [list, setList] = useState([]);
+    const [apiRes, setApiRes] = useState({});
     useEffect(() => {
         getList().then((data) => {
-            setList(data);
+            setApiRes(data);
         })
     }, [])
+    if (!apiRes || !apiRes.all_data) {
+        return (<div>Loading....</div>)
+    }
     return (
         <div style={{ height: '100%', width: '100%' }}>
-            <TopSummary data={list} />
+            <TopSummary data={apiRes.all_data} other_info={apiRes.scrap_data} />
+            <VaccineSummary other_info={apiRes.scrap_data} />
             <Box mt={5}>
-                <StateDataTable data={list} />
+                <StateDataTable data={apiRes.all_data} />
             </Box>
         </div>
     );

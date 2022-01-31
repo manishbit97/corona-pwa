@@ -113,6 +113,9 @@ function StateDataTable(props) {
             sortComparator: (v1, v2) => v1.death - (v2.death)
         },
     ];
+    if(!props.data || props.data.length <= 0){
+        return (<div>Loading...</div>)
+    }
     const rows = mapResponseData(props.data);
     return (
         <React.Fragment>
