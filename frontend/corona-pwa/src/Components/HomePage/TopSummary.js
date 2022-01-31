@@ -37,7 +37,7 @@ function TopSummary(props) {
     let delta_death = indiaObj ? (indiaObj.delta_death) : 0;
     return (
         <React.Fragment>
-            <img height="100px" width="100px" src="https://www.learningcontainer.com/wp-content/uploads/2020/08/Small-Sample-png-Image-File-Download.jpg" />
+            {/* <img height="100px" width="100px" src="https://www.learningcontainer.com/wp-content/uploads/2020/08/Small-Sample-png-Image-File-Download.jpg" /> */}
             <Typography color="text.primary" sx={{
                 display: 'flex',
                 flexDirection: 'column',
