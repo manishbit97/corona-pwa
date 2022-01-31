@@ -3,7 +3,7 @@ const axios = require('axios');
 const cacheHelper = require('../../services/_helper/cacheHelper');
 const cheerio = require('cheerio');
 const rp = require('request-promise');
-
+const apimap = require('./apimap');
 module.exports = {
     scrapeMohfwApi,
     getScrapData
@@ -21,6 +21,10 @@ let formatApiResponse = (apidata) => {
             delete element['cured'];
             delete element['positive'];
             delete element['death'];
+            let state_code = 10;
+            console.log(state_code, apimap[state_code + '']);
+            element['text_code'] = apimap[element['state_code']] ? apimap[element.state_code]["text_code"] : '';
+            element['id'] = element['text_code'];
         })
     }
     return apidata;
@@ -47,7 +51,7 @@ async function getScrapData() {
                 const $ = cheerio.load(html);
                 const totalVaccin = $('#site-dashboard > div > div > div:nth-child(2) > div.col-xs-8.site-stats-count.sitetotal > div > span.coviddata').text();
                 const time = $('#site-dashboard > div > div > div:nth-child(1) > div:nth-child(1) > h5 > span').text().split('IST')[0].split('on :')[1].trim();
-                const delta_vaccin = $("#site-dashboard > div > div > div:nth-child(2) > div.col-xs-8.site-stats-count.sitetotal > div > span.coviddataval").text().replace(/[():]/g,'').trim();
+                const delta_vaccin = $("#site-dashboard > div > div > div:nth-child(2) > div.col-xs-8.site-stats-count.sitetotal > div > span.coviddataval").text().replace(/[():]/g, '').trim();
                 console.log(delta_vaccin);
                 const vaccin_timestamp = $('#site-dashboard > div > div > div:nth-child(2) > div.col-xs-2 > h6 > span').text().split("on :")[1].trim()
                 const delta_test = $('#main-content > header > div > div > div > div:nth-child(1) > div > marquee > span').text().split('day ')[1].trim()
