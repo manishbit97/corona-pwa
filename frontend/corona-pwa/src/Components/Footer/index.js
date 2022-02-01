@@ -11,6 +11,9 @@ function Copyright(props) {
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
+            <Typography component="h4" variant="h7" color="text.secondary" gutterBottom>
+                Designed and Developed by <a href="http://linkedin.com/in/manishbit97" target="_blank">Manish Kumar </a>
+            </Typography>
         </Typography>
     );
 }

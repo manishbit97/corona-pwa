@@ -31,7 +31,21 @@ registerRoute(
             new CacheableResponsePlugin({
                 statuses: [0, 200],
             }),
-            new ExpirationPlugin({ maxEntries: 2,maxAgeSeconds:10 }), // Will cache maximum 1 requests.
+            new ExpirationPlugin({ maxEntries: 2, maxAgeSeconds: 120 }), // Will cache maximum 1 requests.
+        ]
+    })
+);
+
+registerRoute(
+    ({ url }) =>
+        url.href === 'https://rawgit.com/Anujarya300/bubble_maps/master/data/geography-data/india.topo.json',
+    new CacheFirst({
+        cacheName: 'topo-map',
+        plugins: [
+            new CacheableResponsePlugin({
+                statuses: [0, 200],
+            }),
+            new ExpirationPlugin({ maxEntries: 2, maxAgeSeconds: 10*24*60 }), // Will cache maximum 1 requests.
         ]
     })
 );

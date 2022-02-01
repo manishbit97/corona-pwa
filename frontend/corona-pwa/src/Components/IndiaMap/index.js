@@ -65,7 +65,7 @@ function IndiaMap(props) {
         fromColor: COLOR_RANGE[0],
         toColor: COLOR_RANGE[COLOR_RANGE.length - 1],
         min: 0,
-        max: data.reduce((max, item) => (item.value > max ? item.value : max), 0)
+        max: data.reduce((max, item) => (parseInt(item.value) > max ? parseInt(item.value) : max), 0)
     };
     const onMouseEnter = (geo, current = { value: 'NA' }) => {
         return () => {
@@ -91,8 +91,8 @@ function IndiaMap(props) {
             <ComposableMap
                 projectionConfig={PROJECTION_CONFIG}
                 projection="geoMercator"
-                width={240}
-                height={300}
+                width={220}
+                height={200}
                 data-tip=""
             >
                 <Geographies geography={INDIA_TOPO_JSON}>
