@@ -19,7 +19,7 @@ function AboutUs(props) {
             {/* <IndiaMap /> */}
             <br/><br /><br />
             <Typography component="h4" variant="h7" color="text.secondary" gutterBottom>
-                CodeBase :  <a href="https://github.com/manishbit97/corona-pwa" target="_blank">Gihub Link </a>
+                CodeBase :  <a href="https://github.com/manishbit97/corona-pwa" target="_blank">Github Link </a>
             </Typography>
 
 
