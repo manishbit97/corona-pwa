@@ -29,7 +29,7 @@ function Card(props) {
     );
 }
 function TopSummary(props) {
-    let indiaObj = props.data ? props.data.find((ele) => ele.sno == "11111") : {};
+    let indiaObj = props.data ? props.data.find((ele) => ele.sno == "37") : {};
     let active = indiaObj ? (indiaObj.new_active) : 0;
     let recovered = indiaObj ? (indiaObj.new_cured) : 0;
     let death = indiaObj ? (indiaObj.new_death) : 0;
